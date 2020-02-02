@@ -6,6 +6,9 @@ var ballY = 50;
 var ballSpeedX = 10;
 var ballSpeedY = 4;
 
+var sun = new Image();
+var earth = new Image();
+
 var player1Score = 0;
 var player2Score = 0;
 
@@ -19,31 +22,8 @@ const PADDLE_HEIGHT = 100;
 const WINNING_SCORE = 3;
 
 function init() {
-
-    // Put back to white if you don't like sun picture
-}
-
-window.onload = function() {
-    console.log("Hello World");
-    canvas = document.getElementById('gameCanvas');
-    canvasContext = canvas.getContext('2d');
-    canvasContext.font = "30px Arial";
-    
-    var framesPerSecond = 30;
-
-    setInterval(
-        function() {
-        moveEverything();
-        drawEverything();
-        }, 
-        1000/framesPerSecond);
-
-        canvas.addEventListener('mousedown', handleMouseClick);
-        canvas.addEventListener('mousemove',
-                        function(evt) {
-                            var mousePos = calculateMousePos(evt);
-                            paddle1Y = mousePos.y-(PADDLE_HEIGHT/2);
-                    });
+    // sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
+    earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
 }
 
 function drawNet() {
@@ -168,9 +148,7 @@ function drawEverything() {
         return;
     }
 
-    // Initialization
-    init();
-
+    // Centerline "Net"
     drawNet();
 
     // Left Paddle
@@ -180,8 +158,36 @@ function drawEverything() {
     colorRect(canvas.width-PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 
     // Ball
-    colorCircle(ballX, ballY, 10, 'white');
+    // colorCircle(ballX, ballY, 10, 'white');
+    canvasContext.drawImage(earth, ballX, ballY);
 
+    // Scores
     canvasContext.fillText(player1Score, 100, 100);
     canvasContext.fillText(player2Score, canvas.width-100, 100);
+}
+
+// Initialization
+init();
+
+window.onload = function() {
+    console.log("Hello World");
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+    canvasContext.font = "30px Arial";
+    
+    var framesPerSecond = 30;
+
+    setInterval(
+        function() {
+        moveEverything();
+        drawEverything();
+        }, 
+        1000/framesPerSecond);
+
+        canvas.addEventListener('mousedown', handleMouseClick);
+        canvas.addEventListener('mousemove',
+                        function(evt) {
+                            var mousePos = calculateMousePos(evt);
+                            paddle1Y = mousePos.y-(PADDLE_HEIGHT/2);
+                    });
 }

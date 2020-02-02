@@ -8,6 +8,7 @@ var ballSpeedY = 4;
 
 var sun = new Image();
 var earth = new Image();
+var jack = new Image();
 
 var player1Score = 0;
 var player2Score = 0;
@@ -24,6 +25,7 @@ const WINNING_SCORE = 3;
 function init() {
     // sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
     earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
+    jack.src = 'images/Jack.png';
 }
 
 function drawNet() {
@@ -159,7 +161,8 @@ function drawEverything() {
 
     // Ball
     // colorCircle(ballX, ballY, 10, 'white');
-    canvasContext.drawImage(earth, ballX, ballY);
+    // canvasContext.drawImage(earth, ballX, ballY);
+    canvasContext.drawImage(jack, ballX, ballY, 80, 80); // Scale image size
 
     // Scores
     canvasContext.fillText(player1Score, 100, 100);

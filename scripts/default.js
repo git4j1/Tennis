@@ -19,7 +19,7 @@ var paddle2Y = 250;
 var showingWinScreen = false;
 
 const PADDLE_THICKNESS = 10;
-const PADDLE_HEIGHT = 100;  
+const PADDLE_HEIGHT = 100;
 const WINNING_SCORE = 3;
 
 function init() {
@@ -91,10 +91,10 @@ function moveEverything() {
         return;
     }
     computerMovement();
-    
+
     ballX += ballSpeedX;
     ballY += ballSpeedY;
-    
+
     if (ballX < 0) {
         if (ballY > paddle1Y &&
         ballY < paddle1Y + PADDLE_HEIGHT) {
@@ -107,9 +107,9 @@ function moveEverything() {
             player2Score++; //must be BEFORE ballReset()
             ballReset();
         }
-        
+
     }
-    
+
     if (ballX > canvas.width) {
         if (ballY > paddle2Y &&
         ballY < paddle2Y + PADDLE_HEIGHT) {
@@ -121,13 +121,13 @@ function moveEverything() {
         } else {
             player1Score++; //must be BEFORE ballReset()
             ballReset();
-        }            
+        }
     }
 
     if (ballY < 0) {
             ballSpeedY = -ballSpeedY;
     }
-    
+
     if (ballY > canvas.height) {
             ballSpeedY = -ballSpeedY;
     }
@@ -145,7 +145,7 @@ function drawEverything() {
         } else if (player2Score >= WINNING_SCORE) {
             canvasContext.fillText("Right Player Won!", 350, 200);
         }
-        
+
         canvasContext.fillText("click to continue", 350, 500);
         return;
     }
@@ -161,8 +161,8 @@ function drawEverything() {
 
     // Ball
     // colorCircle(ballX, ballY, 10, 'white');
-    // canvasContext.drawImage(earth, ballX, ballY);
-    canvasContext.drawImage(jack, ballX, ballY, 80, 80); // Scale image size
+    canvasContext.drawImage(earth, ballX, ballY);
+    //canvasContext.drawImage(jack, ballX, ballY, 80, 80); // Scale image size
 
     // Scores
     canvasContext.fillText(player1Score, 100, 100);
@@ -177,14 +177,14 @@ window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     canvasContext.font = "30px Arial";
-    
+
     var framesPerSecond = 30;
 
     setInterval(
         function() {
         moveEverything();
         drawEverything();
-        }, 
+        },
         1000/framesPerSecond);
 
         canvas.addEventListener('mousedown', handleMouseClick);
